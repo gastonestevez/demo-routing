@@ -6,6 +6,7 @@ import Contact from "./pages/Contact"
 import NotFound from "./components/NotFound/NotFound"
 import Navbar from "./components/Navbar/Navbar"
 import Product from "./pages/Product"
+import Register from "./pages/Register"
 
 function App() {
     return (
@@ -24,6 +25,9 @@ function App() {
                     </Route>
                     <Route exact path="/product/:id">
                         <Product />
+                    </Route>
+                    <Route exact path="/register">
+                        <Register />
                     </Route>
                     
                     <Route path="*">

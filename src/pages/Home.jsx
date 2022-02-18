@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
 export default class Home extends Component {
     constructor(props) {
@@ -11,9 +12,9 @@ export default class Home extends Component {
     componentDidMount() {
         fetch("https://fakestoreapi.com/products")
             .then((res) => res.json())
-            .then(data => {
+            .then((data) => {
                 this.setState({
-                    products: data
+                    products: data,
                 })
             })
     }
@@ -23,20 +24,21 @@ export default class Home extends Component {
             <>
                 <h1>Home</h1>
                 <div>
-                    {
-                        this.state.products.length ? (
-                            <ul>
-                                {
-                                    this.state.products.map(product => {
-                                        return <li>{product.title}</li>
-                                    })
-                                }
-                            </ul>
-
-                        ) : (
-                            <p>Cargando...</p>
-                        )
-                    }
+                    {this.state.products.length ? (
+                        <ul>
+                            {this.state.products.map((product) => {
+                                return (
+                                    <li key={`${product.id}-${product.category}`}>
+                                        <Link to={`/product/${product.id}`}>
+                                            {product.title}
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    ) : (
+                        <p>Cargando...</p>
+                    )}
                 </div>
             </>
         )
