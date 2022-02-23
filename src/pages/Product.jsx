@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min"
 import ProductCard from "../components/ProductCard/ProductCard"
 
@@ -27,15 +28,26 @@ class Product extends Component {
 
     componentDidMount() {
         if (this.props.match.params.id) {
-            fetch(
-                `https://fakestoreapi.com/products/${this.props.match.params.id}`
+            // fetch(
+            //     `https://fakestoreapi.com/products/${this.props.match.params.id}`
+            // )
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         this.setState({
+            //             product: data,
+            //         })
+            //     })
+            const actualProduct = this.props.productReducer.all.find(
+                (item) => {
+                    return item.id === parseInt(this.props.match.params.id)
+                }
             )
-                .then((res) => res.json())
-                .then((data) => {
-                    this.setState({
-                        product: data,
-                    })
-                })
+            console.log(this.props)
+            console.log({actualProduct})
+
+            this.setState({
+                product: actualProduct
+            })
         }
     }
 
@@ -63,4 +75,16 @@ class Product extends Component {
     }
 }
 
-export default withRouter(Product)
+const mapStateToProps = (state) => {
+    return {
+        productReducer: state.productReducer
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product))
