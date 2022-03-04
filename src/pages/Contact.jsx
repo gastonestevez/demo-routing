@@ -1,21 +1,18 @@
-import React, { Component } from "react"
-import { withRouter } from "react-router-dom"
+import React from "react"
+import { useHistory } from "react-router-dom"
 
-export default withRouter(class Contact extends Component {
-    handleGoBack() {
-        this.props.history.goBack()
-    }
+const Contact = () => {
+    const history = useHistory()
 
-    render() {
-        return (
-            <>
-                <h1>Contact</h1>
-                <button onClick={() => this.handleGoBack()}>
-                    {" "}
-                    <strong>{"< "} Back</strong>
-                </button>
-            </>
-        )
-    }
-})
+    return (
+        <>
+            <h1>Contact</h1>
+            <button onClick={() => history.goBack()}>
+                {" "}
+                <strong>{"< "} Back</strong>
+            </button>
+        </>
+    )
+}
 
+export default Contact
